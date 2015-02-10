@@ -14,9 +14,8 @@ def main(argv):
     for line in sys.stdin:
         line = line.rstrip()
         key, _, value = line.partition("\t")
-        _, _, node = key.partition(":")
 
-        with open(PREFIX + node, "a") as f:
+        with open(PREFIX + key, "a") as f:
             f.write(line + "\n")
 
     for filename in os.listdir(DATA_DIR):
