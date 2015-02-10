@@ -14,15 +14,12 @@ def main(argv):
         current = float(data[0])
         try:
             children = [int(n) for n in data[2:]]
-        except ValueError:
-            children = list()
-        try:
             # Distribute the rank of this node among its children
             inheritance = current / len(children)
             for node in children:
                 sys.stdout.write("NodeId:{}\t{}\n".format(node, inheritance))
-        except ZeroDivisionError:
-            pass
+        except (ValueError, ZeroDivisionError):
+            sys.stdout.write("{}\t{}\n".format(key, current))
         # Continue passing local graph information
         sys.stdout.write("{}\t*{}\n".format(key, value))
 

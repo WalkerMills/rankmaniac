@@ -27,7 +27,7 @@ def main(argv):
     current = 0.85 * current + 0.15
     # Write the updated line, along with a convergence flag
     sys.stdout.write("{}\t{},{},{},{}\n".format(
-        key, "C" * (current == old), current, old, children))
+        key, "C" * (abs(current - old) <= .001), current, old, children))
 
 if __name__ == "__main__":
     main(sys.argv)
