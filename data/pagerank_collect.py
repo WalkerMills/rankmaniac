@@ -1,4 +1,4 @@
-#! /usr/bin/env python2
+#! /usr/bin/env python
 
 from __future__ import with_statement
 
@@ -19,7 +19,7 @@ def main(argv):
             f.write(line + "\n")
 
     for filename in os.listdir(DATA_DIR):
-        local_path = "{}/{}".format(DATA_DIR, filename)
+        local_path = DATA_DIR + "/" + filename
         with open(local_path, "r") as f:
             proc = subprocess.Popen(REDUCER, stdin=subprocess.PIPE)
             proc.communicate(''.join(f.readlines()))

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#! /usr/bin/env python
 
 import sys
 
@@ -17,11 +17,11 @@ def main(argv):
             # Distribute the rank of this node among its children
             inheritance = current / len(children)
             for node in children:
-                sys.stdout.write("NodeId:{}\t{}\n".format(node, inheritance))
+                sys.stdout.write("NodeId:%s\t%s\n" % (node, inheritance))
         except (ValueError, ZeroDivisionError):
-            sys.stdout.write("{}\t{}\n".format(key, current))
+            sys.stdout.write("%s\t%s\n" % (key, current))
         # Continue passing local graph information
-        sys.stdout.write("{}\t*{}\n".format(key, value))
+        sys.stdout.write("%s\t*%s\n" % (key, value))
 
 if __name__ == "__main__":
     main(sys.argv)

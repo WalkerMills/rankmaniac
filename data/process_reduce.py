@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#! /usr/bin/env python
 
 import sys
 
@@ -16,7 +16,7 @@ def main(argv):
         # We got a divergent rank
         if converged == "diverged":
             # Pass the data along to be used for the next iteration
-            sys.stdout.write("{}\n".format(value))
+            sys.stdout.write(value + "\n")
         # We got a convergent rank
         elif converged == "converged":
             # Check if this is a null message
@@ -31,14 +31,14 @@ def main(argv):
                 final.append(value.partition(":")[2])
             else:
                 # Pass the data along to be used for the next iteration
-                sys.stdout.write("{}\n".format(value))
+                sys.stdout.write(value + "\n")
     # If all ranks have converged
     if convergance:
         # Output the final rankings
         for line in final:
             node, _, line = line.partition("\t")
             rank, _, _ = line.partition(",")
-            sys.stdout.write("FinalRank:{}\t{}\n".format(rank, node))
+            sys.stdout.write("FinalRank:%s\t%s\n" % (rank, node))
 
 if __name__ == "__main__":
     main(sys.argv)

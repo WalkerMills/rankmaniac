@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#! /usr/bin/env python
 
 import sys
 
@@ -26,8 +26,8 @@ def main(argv):
     # Scale the new rank with alpha, and add 1 - alpha
     current = 0.85 * current + 0.15
     # Write the updated line, along with a convergence flag
-    sys.stdout.write("{}\t{},{},{},{}\n".format(
-        key, "C" * (abs(current - old) <= .0025), current, old, children))
+    sys.stdout.write("%s\t%s,%f,%f,%s\n" %
+        (key, "C" * (abs(current - old) <= .0025), current, old, children))
 
 if __name__ == "__main__":
     main(sys.argv)
