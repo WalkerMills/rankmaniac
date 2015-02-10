@@ -1,21 +1,44 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import sys
 
-#
-# This program simply represents the identity function.
-#
-converged_msg = []
-not_converged = []
-converged = True
-for line in sys.stdin:
-    key, input_line = line.partition('\t')
-    # if any of the nodes haven't converged, pagerank hasn't finished
-    if value.startswith('*'):
-        converged = False
-    if converged:
-        converged_msg.append('FinalRank:' + rank + '\t' + node_id)
-    not_converged_msg.append(input_line)
-    if bool(key)
-    sys.stdout.write(line)
+def main(argv):
+    # Flag for specifying if the iteration has converged
+    convergance = True
+    # Lines that have converged
+    final = list()
+    # While we have a line to process
+    for line in sys.stdin:
+        # Strip whitespace
+        line = line.rstrip()
+        # Extract the key & value from the line
+        converged, _, value = line.partition("\t")
+        # We got a divergent rank
+        if converged == "diverged":
+            # Pass the data along to be used for the next iteration
+            sys.stdout.write("{}\n".format(value))
+        # We got a convergent rank
+        elif converged == "converged":
+            # Check if this is a null message
+            non_null, _, _ = value.partition(",")
+            if not non_null:
+                # A null converged message indicates global nonconvergence
+                convergance = False
+                continue
+            # If the rankings have not yet diverged
+            if convergance:
+                # Cache the line while we determine if all nodes have converged
+                final.append(value.partition(":")[2])
+            else:
+                # Pass the data along to be used for the next iteration
+                sys.stdout.write("{}\n".format(value))
+    # If all ranks have converged
+    if convergance:
+        # Output the final rankings
+        for line in final:
+            node, _, line = line.partition("\t")
+            rank, _, _ = line.partition(",")
+            sys.stdout.write("FinalRank:{}\t{}\n".format(rank, node))
 
+if __name__ == "__main__":
+    main(sys.argv)
