@@ -17,6 +17,9 @@ def main(argv):
         line = line.rstrip()
         # Extract the key & value from the line
         key, _, value = line.partition("\t")
+        # Get the count from the key
+        count, _, _ = key.partition(',')
+        count = int(count)
 
         # If we got graph structure information
         if value.startswith("*"):

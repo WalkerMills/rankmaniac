@@ -11,6 +11,10 @@ def main(argv):
         key, _, value = line.partition("\t")
         # Extract the convergence flag
         converged, _, value = value.partition(",")
+        # Mark everything as converged to output on 50th iteration
+        count,_,_ = key.partition(',')
+        if count == 50:
+            converged = True
         # If the ranks for this node converged
         if converged:
             # Send this node to the converged reducer
