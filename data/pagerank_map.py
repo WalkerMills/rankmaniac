@@ -21,6 +21,8 @@ def main(argv):
         key = str(count) + "|" + key
         # Continue passing local graph information
         sys.stdout.write("%s\t*%s\n" % (key, value))
+        # Remove power_ext to isolate children
+        data = value.partition(';')[0]
         # Parse data in the form (C,)?current_rank,old_rank,children
         data = value.split(",")
         # Check for convergence
