@@ -1,3 +1,5 @@
+#! /usr/bin/env python2
+
 """
 Utility to execute map-reduce jobs on Amazon EMR.
 
@@ -97,9 +99,6 @@ def do_main(team_id, access_key, secret_key,
     print('Terminated')
 
 if __name__ == '__main__':
-
-    team_id = 'YOUR-TEAM-ID'
-    access_key = 'YOUR-ACCESS-KEY'
-    secret_key = 'YOUR-SECRET-KEY'
-
-    do_main(team_id, access_key, secret_key)
+    with open("credentials.txt", "r") as f:
+        team, access, secret = [l.strip() for l in f.readlines()[:3]]
+    do_main(team, access, secret)
