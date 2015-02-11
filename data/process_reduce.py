@@ -28,7 +28,7 @@ def main(argv):
             # If the rankings have not yet diverged
             if convergance:
                 # Cache the line while we determine if all nodes have converged
-                final.append(value.partition(":")[2])
+                final.append(value)
             else:
                 # Pass the data along to be used for the next iteration
                 sys.stdout.write(value + "\n")
@@ -37,7 +37,9 @@ def main(argv):
         # Output the final rankings
         for line in final:
             node, _, line = line.partition("\t")
-            rank, _, _ = line.partition(",")
+            node = node.partition(":")[2]
+            line = line.partition(",")[2]
+            rank = line.partition(",")[0]
             sys.stdout.write("FinalRank:%s\t%s\n" % (rank, node))
 
 if __name__ == "__main__":

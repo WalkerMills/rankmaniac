@@ -3,7 +3,7 @@
 import sys
 
 # Convergence threshold
-EPSILON = .0025
+EPSILON = .001
 
 def main(argv):
     key = str()
@@ -36,7 +36,8 @@ def main(argv):
     current = 0.85 * current + 0.15
     # Write the updated line, along with a convergence flag
     sys.stdout.write("%s\t%s,%f,%f,%s\n" %
-        (key, "C" * (abs(current - old) <= EPSILON), current, old, children))
+        (key, "C" * (abs(current - old) / current**2 <= EPSILON), current,
+         old, children))
 
 if __name__ == "__main__":
     main(sys.argv)
