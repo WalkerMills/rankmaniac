@@ -12,16 +12,14 @@ def main(argv):
         # Extract the convergence flag
         converged, _, value = value.partition(",")
         # Mark everything as converged to output on 50th iteration
-        count,_,_ = key.partition(',')
-        if count == 50:
+        count, _, _ = key.partition("|")
+        if count == "50":
             converged = True
         # If the ranks for this node converged
         if converged:
             # Send this node to the converged reducer
             sys.stdout.write("converged\t%s\tC,%s\n" % (key, value))
         else:
-            # Send a null message to the converged reducer
-            sys.stdout.write("converged\t,\n")
             # Send this node to the diverged reducer
             sys.stdout.write("diverged\t%s\t%s\n" % (key, value))
 

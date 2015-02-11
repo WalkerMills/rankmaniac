@@ -10,6 +10,15 @@ def main(argv):
         line = line.rstrip()
         # Extract the key & value from the line
         key, _, value = line.partition("\t")
+        # Initialize count
+        count = int()
+        # update count, or add a spot for the count if it's the first iteration
+        if key.startswith("N"):
+            count = 1
+        else:
+            count, _, key = key.partition("|")
+            count = int(count) + 1
+        key = str(count) + "|" + key
         # Continue passing local graph information
         sys.stdout.write("%s\t*%s\n" % (key, value))
         # Parse data in the form (C,)?current_rank,old_rank,children
@@ -20,14 +29,6 @@ def main(argv):
         data = data[converged:]
         # Get this node's current rank
         current = float(data[0])
-
-        # update count, or add a spot for the count if it's the first iteration
-        if key.startwith('N'):
-            key = '1,' + key
-        else
-            count,_,node_id = key.partition(',')
-            count = int(count) + 1
-            key = str(count) + node_id 
 
         try:
             # Cast the children's indices to integers
@@ -49,7 +50,7 @@ def main(argv):
                 updates[node] = inheritance
     # Emit the aggregated ranks
     for node, inheritance in updates.items():
-        sys.stdout.write("%s%s\t%f\n" % (key, node, inheritance))
+        sys.stdout.write("%d|NodeId:%s\t%f\n" % (count, node, inheritance))
 
 if __name__ == "__main__":
     main(sys.argv)
