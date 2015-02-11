@@ -14,7 +14,7 @@ def main(argv):
         # If the ranks for this node converged
         if converged:
             # Send this node to the converged reducer
-            sys.stdout.write("converged\t%s\t%s\n" % (key, value))
+            sys.stdout.write("converged\t%s\tC,%s\n" % (key, value))
         else:
             # Send a null message to the converged reducer
             sys.stdout.write("converged\t,\n")

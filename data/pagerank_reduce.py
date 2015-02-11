@@ -2,6 +2,9 @@
 
 import sys
 
+# Convergence threshold
+EPSILON = .0025
+
 def main(argv):
     key = str()
     current = float()
@@ -15,8 +18,14 @@ def main(argv):
         key, _, value = line.partition("\t")
         # If we got graph structure information
         if value.startswith("*"):
+            # Strip the tagging character
+            value = value[1:]
+            # If this node has converged, we are done
+            if value.startswith("C"):
+                sys.stdout.write("%s\t%s\n" % (key, value))
+                return
             # The current rank is now the previous rank
-            old, _, data = value[1:].partition(",")
+            old, _, data = value.partition(",")
             old = float(old)
             # Ignore the rank before the now previous rank, store the children
             _, _, children = data.partition(",")
@@ -27,7 +36,7 @@ def main(argv):
     current = 0.85 * current + 0.15
     # Write the updated line, along with a convergence flag
     sys.stdout.write("%s\t%s,%f,%f,%s\n" %
-        (key, "C" * (abs(current - old) <= .0025), current, old, children))
+        (key, "C" * (abs(current - old) <= EPSILON), current, old, children))
 
 if __name__ == "__main__":
     main(sys.argv)
