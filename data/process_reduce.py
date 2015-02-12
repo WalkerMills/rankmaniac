@@ -2,6 +2,13 @@
 
 import sys
 
+def rank_extractor(line):
+    node, _, line = line.partition("\t")
+    node = node.partition(":")[2]
+    line = line.partition(",")[2]
+    rank = float(line.partition(",")[0])
+    return rank, node
+
 def main(argv):
     # Flag for specifying if the iteration has converged
     convergence = True
@@ -31,12 +38,8 @@ def main(argv):
     # If all ranks have converged
     if convergence:
         # Output the final rankings
-        for line in final:
-            node, _, line = line.partition("\t")
-            node = node.partition(":")[2]
-            line = line.partition(",")[2]
-            rank = line.partition(",")[0]
-            sys.stdout.write("FinalRank:%s\t%s\n" % (rank, node))
+        for rank, node in sorted(map(rank_extractor, final), reverse=True)[:20]:
+            sys.stdout.write("FinalRank:%f\t%s\n" % (rank, node))
     else:
         for line in final:
             sys.stdout.write(line + "\n")
