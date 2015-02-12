@@ -18,7 +18,7 @@ def main(argv):
         # Extract the key & value from the line
         key, _, value = line.partition("\t")
         # Get the count from the key
-        count, _, _ = key.partition("|")
+        count, _, _ = key.partition("_")
         count = int(count)
         # If we got graph structure information
         if value.startswith("*"):
@@ -54,6 +54,7 @@ def main(argv):
         power_ext = str(current)
 
     # Write the updated line, along with a convergence flag
+    #*** change epsilon convergence
     sys.stdout.write("%s\t%s,%f,%f,%s;%s\n" %
         (key, "C" * (abs(current - old) / current <= EPSILON), current,
          old, children, power_ext))

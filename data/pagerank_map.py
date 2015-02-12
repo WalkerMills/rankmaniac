@@ -16,15 +16,15 @@ def main(argv):
         if key.startswith("N"):
             count = 1
         else:
-            count, _, key = key.partition("|")
+            count, _, key = key.partition("_")
             count = int(count) + 1
-        key = str(count) + "|" + key
+        key = str(count) + "_" + key
         # Continue passing local graph information
         sys.stdout.write("%s\t*%s\n" % (key, value))
         # Remove power_ext to isolate children
         data = value.partition(';')[0]
         # Parse data in the form (C,)?current_rank,old_rank,children
-        data = value.split(",")
+        data = data.split(",")
         # Check for convergence
         converged = data[0] == "C"
         # Slice the converged flag off the data, if it exists
@@ -52,7 +52,7 @@ def main(argv):
                 updates[node] = inheritance
     # Emit the aggregated ranks
     for node, inheritance in updates.items():
-        sys.stdout.write("%d|NodeId:%s\t%f\n" % (count, node, inheritance))
+        sys.stdout.write("%d_NodeId:%s\t%f\n" % (count, node, inheritance))
 
 if __name__ == "__main__":
     main(sys.argv)

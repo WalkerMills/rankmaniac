@@ -15,4 +15,4 @@ done
 
 rm $INPUT
 echo "Converged in $COUNT iterations"
-sed 's/FinalRank://' $OUTPUT | sort -r | head -n 25
+cat $OUTPUT
