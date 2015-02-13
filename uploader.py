@@ -37,10 +37,10 @@ def do_main(team_id, access_key, secret_key,
 
     # Default modules for where to expect the pagerank step
     # and process step code
-    pagerank_map = 'pagerank_map.py'
-    pagerank_reduce = 'pagerank_reduce.py'
-    process_map = 'process_map.py'
-    process_reduce = 'process_reduce.py'
+    pagerank_map = 'pagerank_map'
+    pagerank_reduce = 'pagerank_reduce'
+    process_map = 'process_map'
+    process_reduce = 'process_reduce'
 
     # Read the configuration and override defaults
     config = ConfigParser.SafeConfigParser()
