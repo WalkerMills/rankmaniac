@@ -9,8 +9,11 @@ def main(argv):
         line = line.rstrip()
         # Extract the key & value from the line
         key, _, value = line.partition("\t")
-        # Extract the convergence flag
-        converged, _, value = value.partition(",")
+        if value.startswith("C"):
+            # Extract the convergence flag
+            converged, _, value = value.partition(",")
+        else:
+            converged = False
         # Mark everything as converged to output on 50th iteration
         count, _, _ = key.partition("|")
         if count == "50":
