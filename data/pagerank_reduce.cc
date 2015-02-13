@@ -1,9 +1,9 @@
 #include <cmath>
 #include <iostream>
 #include <map>
-#include <string>
 
 #include "tags.hh"
+
 
 const float ALPHA = 0.85;
 const float BETA = 0.15;
@@ -19,6 +19,7 @@ int main() {
     std::string key;
     std::string line;
 
+    // While we have a line to process
     while ( std::getline(std::cin, line) ) {
         // Find the key delimiter
         delim = line.find(KEY_SEP);
@@ -63,7 +64,8 @@ int main() {
             }
         }
     }
-
+    
+    // For every unconverged node
     for ( it = old.begin(); it != old.end(); ++it ) {
         rank = BETA;
         // If we got rank contributions

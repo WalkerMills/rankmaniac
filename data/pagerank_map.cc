@@ -1,6 +1,4 @@
-#include <exception>
 #include <iostream>
-#include <string>
 #include <map>
 #include <vector>
 
@@ -12,7 +10,7 @@ int main() {
     float current;
     float inheritance;
     int child;
-    int count = 1;
+    int iter = 1;
     size_t delim;
     std::string key;
     std::string line;
@@ -34,14 +32,14 @@ int main() {
             // Find the iteration delimiter
             delim = key.find(ITER_SEP);
             // Extract the iteration number
-            count = std::stoi(key.substr(0, delim));
+            iter = std::stoi(key.substr(0, delim));
             // Increment to current iteration
-            ++count;
+            ++iter;
             // Trim the key to exclude the iteration & delimiter
             key.erase(0, delim + 1);
         }
         // Prepend the current iteration to the key
-        key.insert(0, std::to_string(count) + ITER_SEP);
+        key.insert(0, std::to_string(iter) + ITER_SEP);
         // Propagate local graph info
         std::cout << key << KEY_SEP << GRAPH_MARKER << line << std::endl;
         // Check for a convergence flag
@@ -89,6 +87,7 @@ int main() {
         child = std::stoi(line.substr(0, delim));
         // Add this child to the vector of children
         children.push_back(child);
+        
         // Calculate the per-child inherited rank
         inheritance = current / children.size();
         // Aggregate the children's ranks locally
@@ -102,9 +101,10 @@ int main() {
         // Reset the children
         children.clear();
     }
+
     // Emit the aggregated ranks
     for ( uit = updates.begin(); uit != updates.end(); ++uit ) {
-        std::cout << count << ITER_SEP + "NodeId" + ID_SEP << uit->first
+        std::cout << iter << ITER_SEP + "NodeId" + ID_SEP << uit->first
                   << KEY_SEP << uit->second << std::endl;
     }
 }
