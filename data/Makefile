@@ -5,7 +5,7 @@ SHELL = /bin/sh
 CXX = g++
 
 # Default compiler flags (for C and C++)
-override CFLAGS += -O3 -mtune=generic
+override CFLAGS += -O3 -mtune=generic -m32
 
 # Default compiler flags for C++
 override CXXFLAGS += $(CFLAGS) -std=c++11
