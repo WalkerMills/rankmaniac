@@ -39,8 +39,8 @@ def do_main(team_id, access_key, secret_key,
     # and process step code
     pagerank_map = 'pagerank_map'
     pagerank_reduce = 'pagerank_reduce'
-    process_map = 'process_map.py'
-    process_reduce = 'process_reduce.py'
+    process_map = 'process_map'
+    process_reduce = 'process_reduce'
 
     # Read the configuration and override defaults
     config = ConfigParser.SafeConfigParser()

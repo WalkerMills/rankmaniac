@@ -15,7 +15,7 @@ override LD_FLAGS += -Wl,-O1,--sort-common,--as-needed,-z,relro -static
 
 HDRS = tags.hh
 
-BINS = pagerank_map pagerank_reduce process_map
+BINS = pagerank_map pagerank_reduce process_map process_reduce
 
 # Clear allowed target suffixes
 .SUFFIXES:
